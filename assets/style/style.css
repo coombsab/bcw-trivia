@@ -1,1 +1,17 @@
 /* BASIC STYLES HERE */
+
+p {
+  margin: 0;
+}
+
+.bg-correct {
+  background-color: #28bf17;
+}
+
+.bg-incorrect {
+  background-color: #e70b0b;
+}
+
+.text-answered {
+  color: #ffffff;
+}

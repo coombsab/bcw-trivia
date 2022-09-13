@@ -9,10 +9,13 @@ class QuestionsService {
 
   // /api.php?amount=10
   async getQuestions() {
-    // debugger
+    // Categories
+    // Mythology 20
+    // Geography 22
     const response = await triviaServer.get("/api.php", {
       params: {
-        amount: 10
+        amount: 10,
+        category: 20
       }
     })
     // console.log(response.data.results)

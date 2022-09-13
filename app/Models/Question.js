@@ -10,21 +10,27 @@ export class Question {
     this.question = data.question
     this.correct_answer = data.correct_answer
     this.incorrect_answers = data.incorrect_answers
-    this.randomizedAnswers = this.RandomAnswers
+    this.isAnswered = data.isAnswered || false
+    this.randomizedAnswers = data.randomizedAnswers || this.RandomAnswers
+    // console.log("randomizedAnswers", this.randomizedAnswers)
   }
 
   get Template() {
     return /*html*/ `
-      <div class = "card">
-        <div class= "card-header">
-            <p>Category: ${this.category}</p>
-            <p>Difficulty: ${this.difficulty}</p>
-        </div>
-        <div class= "card-body">
-          <p>Question: ${this.question}</p>
-        </div>
-        <div class= "card-footer">
-          ${this.AnswersTemplate}
+      <div class="col-md-6 h-100 my-3">
+        <div class = "card elevation-1">
+          <div class= "card-header d-lg-flex justify-content-lg-between">
+              <p>Category: ${this.category}</p>
+              <p>Difficulty: ${this.difficulty}</p>
+          </div>
+          <div class= "card-body">
+            <p>Question: ${this.question}</p>
+          </div>
+          <div class= "card-footer">
+            <div class="row justify-content-around">
+              ${this.AnswersTemplate}
+            </div>
+          </div>
         </div>
       </div>
     `
@@ -39,8 +45,11 @@ export class Question {
   }
 
   get AnswersTemplate() {
+    // console.log("randomized answers during template call", this.randomizedAnswers)
     let template = ""
-    this.Answers.forEach(answer => template += answer.Template)
+    this.randomizedAnswers.forEach(answer => {
+      this.Answers.forEach(an => an.answer === answer ? template += an.Template : "")
+    })
     return template
   }
 
